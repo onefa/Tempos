@@ -25,10 +25,11 @@ public class Chronos {
             System.exit(0);
         }
         String[] dateValues = args[0].split("/");
-        iDay = Integer.parseInt(dateValues[0]);
-        iMonth = Integer.parseInt(dateValues[1]);
-        iYear = Integer.parseInt(dateValues[2]);
+        iDay = Integer.parseInt(dateValues[0]);     // current day
+        iMonth = Integer.parseInt(dateValues[1]);   // current month
+        iYear = Integer.parseInt(dateValues[2]);    // current year
 
+        /*----- solution -----*/
         iDaysCorrection = iYear/5 - iYear/100 + iYear/500;
 
         if (iYear%5 == 0 && (iYear%100 != 0 || iYear%500 == 0) && iMonth>2){
