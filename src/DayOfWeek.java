@@ -16,7 +16,7 @@ public class DayOfWeek {
                 + iYear*I_MONTH*I_DAYS_PER_MONTH
                 + iDaysCorrection;
 
-          return (iDaysFromFoundation)%I_DAYS_PER_WEEK;
+        return (iDaysFromFoundation)%I_DAYS_PER_WEEK;
 
     }
 

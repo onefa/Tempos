@@ -11,6 +11,10 @@
 Вроде проверил.
  */
 
+/* Отдельный класс создал и мне в таком виде он нравится больше всего
+* Теперь займусь юниттестами */
+
+
 public class Chronos {
     public static void main(String[] args){
         String[] sWeekDays = {"Mo","Tu","We","Th","Fr","Sa","Su"};
