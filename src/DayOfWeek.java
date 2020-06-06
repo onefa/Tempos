@@ -1,6 +1,7 @@
 public class DayOfWeek {
     final static int I_MONTH = 12;
     final static int I_DAYS_PER_MONTH = 30;
+    final static int I_DAYS_PER_WEEK = 7;
 
     public static int calculate(int iDay, int iMonth, int iYear){
 
@@ -15,7 +16,7 @@ public class DayOfWeek {
                 + iYear*I_MONTH*I_DAYS_PER_MONTH
                 + iDaysCorrection;
 
-          return (iDaysFromFoundation)%7;
+          return (iDaysFromFoundation)%I_DAYS_PER_WEEK;
 
     }
 
