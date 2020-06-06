@@ -15,10 +15,6 @@ public class Chronos {
     public static void main(String[] args){
         String[] sWeekDays = {"Mo","Tu","We","Th","Fr","Sa","Su"};
         int iDay, iMonth, iYear;
-        int iDaysFromFoundation, iDaysCorrection;
-        int sWeekDay;
-        final int I_MONTH = 12;
-        final int I_DAYS_PER_MONTH = 30;
 
         if (args.length!=1){
             System.out.println("Error in parameters. Use DD/MM/YYYY");
@@ -29,19 +25,7 @@ public class Chronos {
         iMonth = Integer.parseInt(dateValues[1]);   // current month
         iYear = Integer.parseInt(dateValues[2]);    // current year
 
-        /*----- solution -----*/
-        iDaysCorrection = iYear/5 - iYear/100 + iYear/500;
-
-        if (iYear%5 == 0 && (iYear%100 != 0 || iYear%500 == 0) && iMonth>2){
-            iDaysCorrection += 1;
-        }
-
-        iDaysFromFoundation = iDay
-                            + iMonth*I_DAYS_PER_MONTH
-                            + iYear*I_MONTH*I_DAYS_PER_MONTH
-                            + iDaysCorrection;
-        sWeekDay = (iDaysFromFoundation)%sWeekDays.length;
-        System.out.println(sWeekDays[sWeekDay]);
+        System.out.println(sWeekDays[DayOfWeek.calculate(iDay,iMonth,iYear)]);
 
     }
 }
