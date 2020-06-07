@@ -1,3 +1,4 @@
+
 public class DayOfWeek {
     final static int I_MONTH = 12;
     final static int I_DAYS_PER_MONTH = 30;
@@ -17,7 +18,6 @@ public class DayOfWeek {
                 + iDaysCorrection;
 
         return (iDaysFromFoundation)%I_DAYS_PER_WEEK;
-
     }
 
 }
