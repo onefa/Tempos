@@ -16,7 +16,8 @@ public class DayOfWeek {
         if (month<1 || month>12){
             throw new IllegalArgumentException("Invalid Month: " + month);
         }
-        if (day<1 || (leapYear && month ==2 && day >31) || (!leapYear && day>30) ){
+
+        if (!((leapYear && month ==2 && day == 31) || (day>1 && day<30))){
             throw new IllegalArgumentException("Invalid date: " + day + '/' + month + '/' + year);
         }
 
