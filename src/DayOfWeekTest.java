@@ -74,10 +74,8 @@ class DayOfWeekTest {
         }
     }
 
-
-
     @Test
-    void calculateExcpept() throws IllegalArgumentException{
+    void calculateExcept() throws IllegalArgumentException{
         for (CheckParameter exceptParameter : exceptParameters) {
             Throwable e = assertThrows(IllegalArgumentException.class,
                                       () -> DayOfWeek.calculate(exceptParameter.getDay(),
