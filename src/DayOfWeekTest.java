@@ -1,95 +1,90 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.lang.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class DayOfWeekTest {
+    class CheckParameter {
+        int day;
+        int month;
+        int year;
+        int dayOfWeek;
+        String exceptMessage;
 
-    @org.junit.jupiter.api.Test
-    void calculate240801() {
-        int calcRes = DayOfWeek.calculate(24,8,1);
-        int checkDayOfWeek = 1;
-        Assertions.assertEquals(checkDayOfWeek,calcRes);
+        public CheckParameter(int day, int month, int year, String exceptMessage) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+            this.exceptMessage = exceptMessage;
+        }
+
+        public CheckParameter(int day, int month, int year, int dayOfWeek) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+            this.dayOfWeek = dayOfWeek;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public int getDayOfWeek() {
+            return dayOfWeek;
+        }
+
+        public String getExceptMessage() {
+            return exceptMessage;
+        }
+    }
+    CheckParameter [] acceptParameters = { new CheckParameter(24,8,1,1),
+                                           new CheckParameter(24,8,1001,1),
+                                           new CheckParameter(1,1,1,6),
+                                           new CheckParameter(30,1,1,0),
+                                           new CheckParameter(1,3,5,2),
+                                           new CheckParameter(30,3,5,3),
+                                           new CheckParameter(31,2,5,1)
+    };
+
+    CheckParameter [] exceptParameters = { new CheckParameter(15,11,0,"Invalid Year: 0"),
+                                           new CheckParameter(1,13,10,"Invalid Month: 13"),
+                                           new CheckParameter(31,2,1,"Invalid Date: 31/2/1"),
+                                           new CheckParameter(31,3,5,"Invalid Date: 31/3/5"),
+
+    };
+
+    @Test
+    void calculateAccept() {
+        for (CheckParameter acceptParameter : acceptParameters) {
+            Assertions.assertEquals(acceptParameter.getDayOfWeek(),
+                                    DayOfWeek.calculate(acceptParameter.getDay(),
+                                                        acceptParameter.getMonth(),
+                                                        acceptParameter.getYear()));
+        }
     }
 
-    @org.junit.jupiter.api.Test
-    void calculate24081001() {
-        int calcRes = DayOfWeek.calculate(24,8,1001);
-        int checkDayOfWeek = 1;
-        Assertions.assertEquals(checkDayOfWeek,calcRes);
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculate010101() {
-        int calcRes = DayOfWeek.calculate(1,1,1);
-        int checkDayOfWeek = 6;
-        Assertions.assertEquals(checkDayOfWeek,calcRes);
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculate300101() {
-        int calcRes = DayOfWeek.calculate(30, 1, 1);
-        int checkDayOfWeek = 0;
-        Assertions.assertEquals(checkDayOfWeek, calcRes);
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculate010305() {
-        int calcRes = DayOfWeek.calculate(1, 3, 5);
-        int checkDayOfWeek = 2;
-        Assertions.assertEquals(checkDayOfWeek, calcRes);
-    }
-    @org.junit.jupiter.api.Test
-    void calculate300305() {
-        int calcRes = DayOfWeek.calculate(30, 3, 5);
-        int checkDayOfWeek = 3;
-        Assertions.assertEquals(checkDayOfWeek, calcRes);
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculate310205() {
-        int calcRes = DayOfWeek.calculate(31, 2, 5);
-        int checkDayOfWeek = 1;
-        Assertions.assertEquals(checkDayOfWeek, calcRes);
-    }
 
 
-
-    @org.junit.jupiter.api.Test
-    void calculateInvalidYear0() throws IllegalArgumentException{
-        Throwable e = assertThrows(IllegalArgumentException.class, () -> {
-            DayOfWeek.calculate(15, 11, 0);
-        });
-        Assertions.assertEquals("Invalid Year: 0", e.getMessage());
-
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculateInvalidMonth13() throws IllegalArgumentException{
-        Throwable e = assertThrows(IllegalArgumentException.class, () -> {
-            DayOfWeek.calculate(1, 13, 10);
-        });
-        Assertions.assertEquals("Invalid Month: 13", e.getMessage());
-
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculateInvalidNonLeap31feb() throws IllegalArgumentException{
-        Throwable e = assertThrows(IllegalArgumentException.class, () -> {
-            DayOfWeek.calculate(31, 2, 1);
-        });
-        Assertions.assertEquals("Invalid Date: 31/2/1", e.getMessage());
-
-    }
-
-    @org.junit.jupiter.api.Test
-    void calculateInvalidDate310305() throws IllegalArgumentException{
-        Throwable e = assertThrows(IllegalArgumentException.class, () -> {
-            DayOfWeek.calculate(31, 3, 5);
-        });
-        Assertions.assertEquals("Invalid Date: 31/3/5", e.getMessage());
-
+    @Test
+    void calculateExcpept() throws IllegalArgumentException{
+        for (CheckParameter exceptParameter : exceptParameters) {
+            Throwable e = assertThrows(IllegalArgumentException.class,
+                                      () -> DayOfWeek.calculate(exceptParameter.getDay(),
+                                                                exceptParameter.getMonth(),
+                                                                exceptParameter.getYear()));
+            Assertions.assertEquals(exceptParameter.getExceptMessage(), e.getMessage());
+        }
     }
 
 }
