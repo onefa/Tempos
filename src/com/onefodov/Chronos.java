@@ -1,3 +1,4 @@
+package com.onefodov;
 /*
 Я не знал в каком виде тебе написать решение этой задачки,
 подумал пусть будет так.
@@ -12,15 +13,15 @@
  */
 
 /* Отдельный класс создал и мне в таком виде он нравится больше всего
-* Теперь займусь юниттестами */
+ * Теперь займусь юниттестами */
 
 
 public class Chronos {
-    public static void main(String[] args){
-        String[] sWeekDays = {"Mo","Tu","We","Th","Fr","Sa","Su"};
+    public static void main(String[] args) {
+        String[] sWeekDays = {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
         int iDay, iMonth, iYear;
 
-        if (args.length!=1){
+        if (args.length != 1) {
             System.out.println("Error in parameters. Use DD/MM/YYYY");
             System.exit(0);
         }
@@ -29,7 +30,6 @@ public class Chronos {
         iMonth = Integer.parseInt(dateValues[1]);   // current month
         iYear = Integer.parseInt(dateValues[2]);    // current year
 
-        System.out.println(sWeekDays[DayOfWeek.calculate(iDay,iMonth,iYear)]);
-
+        System.out.println(sWeekDays[DayOfWeek.calculate(iDay, iMonth, iYear)]);
     }
 }
